@@ -1,54 +1,76 @@
-package com.formation.lundi25;
+
+ package com.formation.lundi25;
 
 public class Main {
 
     public static void main(String[] args) {
-        int[] tab = { 1,2,3,4,5,6,7,8,9 };
-
-        tab = getPrimeNumber(tab);
-        System.out.println("Nombre Premier");
-        showPrimeNumber(tab,0);
-    }
-
-
-    public static int[] getPrimeNumber(int[] tab) {
-        for (int i = 0; i < tab.length; i++) {
-            if(testPremier( tab[i] )== false) {
-                tab[i] = 0;
-            }
+        int[] tab = {2,-2,99,88,7,13,12,10,18,22};
+        System.out.println(isPrime(7));
+        System.out.println(isPrime(6));
+        System.out.println(isPrime(0));
+        System.out.println(isPrime(1001));
+        int[] result = getPrimeNumbers(tab);
+        for(int i:result) {
+            System.out.print(i+" ");
         }
-        return tab;
+        System.out.println("\ntest recursif : "+recursif( result, 0 , 1));
     }
 
-
-    public static boolean testPremier(int chiffreTest) {
-        boolean etatNombrePremier = true;
-        if (chiffreTest < 0){    //Si inferieur a zero
-            etatNombrePremier = false;
+    /**
+     *
+     * @param n
+     * @return trfgdfdgdfue if n is prime toto
+     */
+    public static boolean isPrime(int n) {
+        boolean result = true;
+        if(n < 2) {
+            result = false;
         }
         else {
-            if (chiffreTest != 0 && chiffreTest != 1) {  // Si le chiffre n'est pas zero ou 1
-                for (int i = 2; i <= chiffreTest/2; i++) { // On parcourt les modulo en partant de 2
-                    if (chiffreTest != i && chiffreTest % i == 0) {     //Si le numero n'est pas egal a i est que le modulo est 0
-                        etatNombrePremier = false; 				// c'est un chiffre premier
-                        break;
-                    }
+            for (int i = 2; i < n; i++) {
+                if (n % i == 0) {
+                    result = false;
+                    break;
                 }
             }
         }
-        return etatNombrePremier;
+        return result;
+    }
+
+    public static int[] getPrimeNumbers(int[] tab) {
+        int[] result = new int[tab.length];
+        int index = 0;
+        for(int i : tab) {
+            if(isPrime(i)) {
+                result[index] = i;
+                index++;
+            }
+        }
+        return result;
     }
 
 
-    public static void showPrimeNumber(int[] tabPrime , int position ) {  //Récursif
-        if( tabPrime[position] != 0)
-            System.out.println( tabPrime[ position ] );
-        if(position == tabPrime.length -1) {
-            return;
+    public static int recursif( int[] tab, int emplacementTab , int result){
+        if( tab[emplacementTab] != 0){
+
+            result = tab[emplacementTab] * result;
+            emplacementTab++;
+            result = recursif(tab, emplacementTab ,result);
         }
-        else {
-            position++;
-            showPrimeNumber(tabPrime, position);
+        return result;
+    }
+
+
+
+
+    public static int multiplierRecursif( int[] tab, int n ){
+        if( n == 1){
+            return tab[0];
+        }
+        else{
+            return tab[n-1] * multiplierRecursif(tab,n-1);  // On demande la valeur précédente
         }
     }
+
+
 }
