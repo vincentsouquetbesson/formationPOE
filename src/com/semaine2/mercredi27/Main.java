@@ -1,5 +1,7 @@
 package com.semaine2.mercredi27;
 
+import java.util.ArrayList;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -45,13 +47,14 @@ public class Main {
 
 
 
+        ArrayList<Transaction>  transactionList = new ArrayList<Transaction>();
 
+        transactionList.add(new Transaction(200, a1,a2));
+        transactionList.add(new Transaction(400, a2,a1));
 
-        Transaction t1 = new Transaction(1200);
-        Transaction t2 = new Transaction(200, a1,a2);
-        System.out.println( a1.toString() );
-        System.out.println( a2.toString() );
-        System.out.println(t2.toString());
+        for (Transaction i : transactionList){
+            System.out.println(i.toString());
+        }
 
     }
 
