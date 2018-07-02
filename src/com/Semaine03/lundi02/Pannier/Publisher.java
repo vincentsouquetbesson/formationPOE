@@ -1,4 +1,4 @@
-package com.semaine3.lundi02;
+package com.Semaine03.lundi02.Pannier;
 
 public class Publisher {
     String name;
