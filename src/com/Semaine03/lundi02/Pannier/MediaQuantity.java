@@ -1,10 +1,10 @@
 package com.Semaine03.lundi02.Pannier;
 
-public class Quantity {
-    Media media;
+public class MediaQuantity {
+    IMedia media;
     int quantity;
 
-    public Quantity(Media media){
+    public MediaQuantity(IMedia media){
         this.media = media;
         this.quantity = 1;
     }
@@ -12,12 +12,17 @@ public class Quantity {
     public void addQuantity(){
         quantity++;
     }
-    public int getQuantity(){
-        return quantity;
+
+    public void lessQuantity(){
+        quantity--;
     }
 
-    public Media getMedia(){
+    public IMedia getMedia(){
         return media;
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 
     public double getNetPrice(){

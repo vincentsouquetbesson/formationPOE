@@ -1,48 +1,81 @@
 package com.Semaine03.lundi02.Pannier;
 
-import java.util.ArrayList;
+import javafx.scene.media.MediaException;
+
+import java.util.HashSet;
 
 public class Pannier {
     int nbArticl;
-    private ArrayList<Quantity> quantitiesList;
 
+    private HashSet<MediaQuantity> quantitiesList;
 
     public Pannier(){
         nbArticl = 0;
-    //    mediaList = new ArrayList<>();
-        quantitiesList =new ArrayList<>();
+        quantitiesList =new HashSet<>();
     }
 
 
-    public void addMedia(Media mediaAdd){
-        for( int i = 0 ; i <  quantitiesList.size() ;i++) {
-            if(mediaAdd.equals( quantitiesList.get(i).getMedia() ) ){
+    public void addMedia(IMedia mediaAdd){
+        /*
+        for( MediaQuantity q:quantitiesList) {
+            if(mediaAdd.equals( q.getMedia() ) ){
                 System.out.println("valeur trouvé");
-                quantitiesList.get(i).addQuantity();
+                q.addQuantity();
                 return;
             }
         }
-        quantitiesList.add( new Quantity(mediaAdd) );
+        quantitiesList.add( new MediaQuantity(mediaAdd) );
+        */
+
+        MediaQuantity res = isMediaInCart(mediaAdd);
+        if( res != null ){
+            System.out.println("valeur trouvé");
+            res.addQuantity();
+            return;
+        }
+        quantitiesList.add( new MediaQuantity(mediaAdd) );
+    }
+
+    private MediaQuantity isMediaInCart(IMedia m){
+        return quantitiesList.stream().filter(row -> row.getMedia() == m).findFirst().orElse(null);
+        //     on parcourt les quantité     Si on trouve un resultat, on arrete , sinon null
     }
 
 
-    public void removeMedia(Media mediaAdd){
-        for( int i = 0 ; i <  quantitiesList.size() ;i++) {
-            if(mediaAdd.equals( quantitiesList.get(i).getMedia() ) ){
-                quantitiesList.remove(i);
+    public void removeMedia(IMedia mediaAdd){
+        for( MediaQuantity q:quantitiesList) {
+            if(mediaAdd.equals( q.getMedia() ) ){
+                quantitiesList.remove(q);
                 return;
             }
         }
-        quantitiesList.add( new Quantity(mediaAdd) );
     }
 
+    /*
+    public void removeQuantityMedia(IMedia mediaAdd) throws MediaException {
+        for (MediaQuantity q : quantitiesList) {
+            if (mediaAdd.equals(q.getMedia())) {
+                if(q.getQuantity () > 1){
+                    q.lessQuantity();
+                }
+                else{
+                //    throw MediaException("a");
+                    System.out.println("erreur pannier");
+                }
+            }
+        }
+    }
+    */
 
 
-    public String getTotalNetPrice( ){
-        double totalNetPrice = 0;
-        for( int i = 0 ; i <  quantitiesList.size() ;i++) {
-            totalNetPrice += quantitiesList.get(i).getNetPrice();
+    public double getTotalNetPrice( ){
+      /*  double totalNetPrice = 0;
+        for(MediaQuantity q:quantitiesList) {
+            totalNetPrice += q.getNetPrice();
         }
         return "le prix total est: "+totalNetPrice;
+*/
+
+        return quantitiesList.stream().mapToDouble(x -> x.getNetPrice()).sum();
     }
 }

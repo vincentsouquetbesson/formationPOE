@@ -7,9 +7,9 @@ public class Main {
         Pannier pannier = new Pannier();
 
 
-        Media b1 =  new Book(10,"harry",4000, tonkam);
+        IMedia  b1 =  new Book(10,"harry",4000, tonkam);
         System.out.println(b1.toString());
-        Media d1 = new DVD(40,"sans-titre01.dvdrip",1,tonkam);
+        IMedia d1 = new DVD(40,"sans-titre01.dvdrip",1,tonkam);
         System.out.println(d1.toString());
 
 
