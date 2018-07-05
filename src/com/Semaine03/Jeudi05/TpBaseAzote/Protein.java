@@ -19,17 +19,17 @@ public class Protein {
         int nbChain = 0;
         for (AmineAcid a:amineAcidsList){
             if(a.getSymbol() ==" "){
-                System.out.println(" Fin de parcourt");
+                //System.out.println(" Fin de parcourt");
                 proteinsList.add(proteinBuffer);
                 proteinBuffer = new Protein();
                 nbChain++;
             }
             else{
-                System.out.print(a.getSymbol());
+                //System.out.print(a.getSymbol());
                 proteinBuffer.addChain(a);
             }
         }
-        System.out.println(" "+nbChain);
+        //System.out.println(" "+nbChain);
         return proteinsList;
     }
 
