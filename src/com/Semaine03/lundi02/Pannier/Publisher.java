@@ -1,6 +1,8 @@
 package com.Semaine03.lundi02.Pannier;
 
-public class Publisher {
+import java.io.Serializable;
+
+public class Publisher implements Serializable {
     String name;
 
     public Publisher( String name){

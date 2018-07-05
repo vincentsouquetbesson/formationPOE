@@ -1,7 +1,9 @@
 package com.Semaine03.lundi02.Pannier;
 
 
-public abstract class Media implements IMedia {
+import java.io.Serializable;
+
+public abstract class Media implements IMedia  {
     private double price;
     private String title;
     private Publisher publisher;
@@ -11,6 +13,7 @@ public abstract class Media implements IMedia {
         this.title = title;
         this.publisher = publisher;
     }
+
 
     @Override
     public double getNetPrice(){
